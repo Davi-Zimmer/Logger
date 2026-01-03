@@ -1,0 +1,16 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    "outDir": "./dist",
+    // See also https://aka.ms/tsconfig/module
+    "module": "es2020",
+    "target": "esnext",
+    "moduleResolution": "bundler",
+    "types": [],
+
+    // Other Outputs
+
+    // Recommended Options
+    "strict": true,
+  }
+}

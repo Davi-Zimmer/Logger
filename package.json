@@ -1,0 +1,17 @@
+{
+  "name": "meanglew-6",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "dev": "tsc && node dist/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/typescript": "^0.4.29",
+    "global": "^4.4.0",
+    "typescript": "^5.9.3"
+  }
+}
