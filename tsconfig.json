@@ -6,7 +6,9 @@
     "module": "es2020",
     "target": "esnext",
     "moduleResolution": "bundler",
-    "types": [],
+    "types": [
+      "node"
+    ],
 
     // Other Outputs
 
