@@ -29,15 +29,18 @@ class _Logger {
 
     }
 
-    public getDevConfig(){
-        return {
-       
-        } as DevConfigInterface
+    private devConfig: DevConfigInterface | null = null
+
+    private getDevConfig(){
+
+        if( !this.devConfig ) throw new Error("Setup is required. Use Logger.Setup( F() => DevConfigInterface)")
+
+        return this.devConfig
     }
 
     public setup( getDevConfig: () => DevConfigInterface ){
         
-        this.getDevConfig = getDevConfig
+        this.devConfig = getDevConfig()
 
         this.currentLogFilePath = this.getLogFilePath()
     }
@@ -81,8 +84,6 @@ class _Logger {
             const timestap = match?.[ 1 ].replaceAll(' ', '') || new Date().toISOString()
             
             const newName = path.join( this.getDirName(), `../Logs/${timestap}.log`)
-
-            console.log( timestap )
     
             fs.renameSync( logPath, newName )
 
@@ -93,10 +94,11 @@ class _Logger {
     }
 
     private getLogFilePath(){
+
+        const devConfig = this.getDevConfig()
         
         this.createLogFolder()
 
-        const devConfig = this.getDevConfig()
 
         try {
             const timestap = Date.now()
@@ -106,20 +108,11 @@ class _Logger {
             const exists = fs.existsSync( logPath )
     
             
-            if( exists && !devConfig.overwriteLogFile ) {
-                console.log( "renomeando" )
-
-                this.renameLogFile( logPath )
-            }
-
+            if( exists && !devConfig.overwriteLogFile ) this.renameLogFile( logPath )
             
             if( !devConfig.logFileEnabled ) return logPath
             
             fs.writeFileSync( logPath, `{ ${ timestap } }\n` )
-
-            console.log( "aqui")
-
-            console.log( devConfig.logFileEnabled )
 
             this.currentLogFilePath = logPath
 

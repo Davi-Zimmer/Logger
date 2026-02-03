@@ -2,7 +2,6 @@ import Logger from "./Logger/Logger.js";
 
 Logger.setup(() => ({
     consoleLogsEnabled : true,
-    logEnabled         : true,
     logFileEnabled     : true,
     overwriteLogFile   : true
 }))
