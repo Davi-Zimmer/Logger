@@ -167,13 +167,19 @@ class _Logger {
 
         if( this.currentLogFilePath && this.getDevConfig().logFileEnabled ){
 
-            fs.appendFileSync( this.currentLogFilePath, this.logText )
+            this.writeInLog()
             
             this.logText = ''
 
         }
 
     }, 500)
+
+    private writeInLog(){
+
+        fs.appendFileSync( this.currentLogFilePath, this.logText )
+
+    }
 
     public echo( logLevel: LogLevel, message: string ){
         try {
@@ -209,7 +215,7 @@ class _Logger {
         this.echo( LogLevel.Warning, this.extractName( meta ) + msg )
 
     }
-
+    
     public error( meta: ImportMeta, msg: string, error?: Error ){
         
         let message = msg
@@ -219,11 +225,17 @@ class _Logger {
         this.echo( LogLevel.Error, this.extractName( meta ) + `${message}\n`)
         
     }
+    
 
     public fatal( meta: ImportMeta, msg: string | Error ){
 
-        this.echo( LogLevel.Fatal, this.extractName( meta ) + msg.toString() )
+        const message = this.extractName( meta ) + msg.toString()
+
+        this.echo( LogLevel.Fatal, message )
         
+        this.writeInLog()
+        
+        return new Error( message )
     }
 
 
