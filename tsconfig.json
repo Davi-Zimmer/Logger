@@ -1,0 +1,14 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    "rootDir": "./Private",
+    "outDir": "./.Public",
+    "module": "esnext",
+    "target": "es2021",
+    "types": [
+      "node"
+    ],
+    "strict": true,
+    "moduleResolution": "bundler"
+  }
+}
